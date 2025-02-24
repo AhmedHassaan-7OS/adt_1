@@ -15,7 +15,13 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.red,
         title: Text('Products'),
-        actions: [IconButton(onPressed: (){showSearch(context: context, delegate: ProductSearchDelegate());}, icon: Icon(Icons.search))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                showSearch(context: context, delegate: ProductSearchDelegate());
+              },
+              icon: Icon(Icons.search))
+        ],
       ),
       body: BlocConsumer<ProductBloc, ProductState>(
         listener: (context, state) {
@@ -36,10 +42,10 @@ class HomeScreen extends StatelessWidget {
               child: GridView.builder(
                 padding: EdgeInsets.all(8),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, 
-                  crossAxisSpacing: 8, 
-                  mainAxisSpacing: 8, 
-                  childAspectRatio: 0.7, 
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                  childAspectRatio: 0.7,
                 ),
                 itemCount:
                     state.products.length + (state.hasReachedMax ? 0 : 1),
@@ -60,8 +66,7 @@ class HomeScreen extends StatelessWidget {
                     child: SlideAnimation(
                       verticalOffset: 50.0,
                       child: FadeInAnimation(
-                        child: ProductCard(
-                            product: product), 
+                        child: ProductCard(product: product),
                       ),
                     ),
                   );
@@ -140,7 +145,6 @@ class ProductCard extends StatelessWidget {
                   ),
                   SizedBox(height: 4),
 
-                 
                   Row(
                     children: [
                       Icon(
