@@ -15,7 +15,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Dummy Products',
-        home: HomeScreen(),
+        home: BlocProvider(
+          create: (context) => ProductBloc()..add(FetchProducts()),
+          child: HomeScreen(),
+        ),
       ),
     );
   }
