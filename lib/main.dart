@@ -11,15 +11,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ProductBloc(),
-      child: MaterialApp(
+          create: (context) => ProductBloc()..add(FetchProducts()),
+          child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Dummy Products',
-        home: BlocProvider(
-          create: (context) => ProductBloc()..add(FetchProducts()),
-          child: HomeScreen(),
+        home: HomeScreen(),
         ),
-      ),
-    );
+      );
   }
 }
