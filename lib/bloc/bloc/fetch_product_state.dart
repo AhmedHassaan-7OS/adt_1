@@ -1,33 +1,33 @@
-part of 'product_bloc.dart';
+part of 'fetch_product_bloc.dart';
 
-sealed class ProductState extends Equatable {
-  const ProductState();
+sealed class FetchProductState extends Equatable {
+  const FetchProductState();
 
   @override
   List<Object> get props => [];
 }
 
-final class ProductInitial extends ProductState {}
+final class FetchProductInitial extends FetchProductState {}
 
-final class ProductLoading extends ProductState {}
+final class FetchProductLoading extends FetchProductState {}
 
-final class ProductLoaded extends ProductState {
+final class FetchProductLoaded extends FetchProductState {
   final List<Product> products;
   final bool hasReachedMax;
   final bool isLoadingMore;
 
-  const ProductLoaded({
+  const FetchProductLoaded({
     required this.products,
     this.hasReachedMax = false,
     this.isLoadingMore = false,
   });
 
-  ProductLoaded copyWith({
+  FetchProductLoaded copyWith({
     List<Product>? products,
     bool? hasReachedMax,
     bool? isLoadingMore,
   }) {
-    return ProductLoaded(
+    return FetchProductLoaded(
       products: products ?? this.products,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,
@@ -38,10 +38,10 @@ final class ProductLoaded extends ProductState {
   List<Object> get props => [products, hasReachedMax, isLoadingMore];
 }
 
-final class ProductError extends ProductState {
+final class FetchProductError extends FetchProductState {
   final String message;
 
-  const ProductError(this.message);
+  const FetchProductError(this.message);
 
   @override
   List<Object> get props => [message];

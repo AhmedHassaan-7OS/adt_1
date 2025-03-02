@@ -1,6 +1,6 @@
+import 'package:adt_1/bloc/bloc/search_product_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:adt_1/bloc/product_bloc.dart';
 
 class ProductSearchDelegate extends SearchDelegate<String> {
   @override
@@ -20,7 +20,7 @@ class ProductSearchDelegate extends SearchDelegate<String> {
     return IconButton(
       icon: Icon(Icons.arrow_back),
       onPressed: () {
-        close(context,query);
+        close(context, query);
       },
     );
   }
@@ -31,13 +31,13 @@ class ProductSearchDelegate extends SearchDelegate<String> {
       return Center(child: Text('Enter a search term'));
     }
 
-    context.read<ProductBloc>().add(SearchProducts(query));
+    context.read<SearchProductBloc>().add(SearchProducts(query));
 
-    return BlocBuilder<ProductBloc, ProductState>(
+    return BlocBuilder<SearchProductBloc, SearchProductState>(
       builder: (context, state) {
-        if (state is ProductLoading) {
+        if (state is SearchProductLoading) {
           return Center(child: CircularProgressIndicator());
-        } else if (state is ProductLoaded) {
+        } else if (state is SearchProductLoaded) {
           final products = state.products;
           if (products.isEmpty) {
             return Center(child: Text('No results found'));
@@ -56,7 +56,7 @@ class ProductSearchDelegate extends SearchDelegate<String> {
               );
             },
           );
-        } else if (state is ProductError) {
+        } else if (state is SearchProductError) {
           return Center(child: Text(state.message));
         }
         return Center(child: Text('Search for products'));
